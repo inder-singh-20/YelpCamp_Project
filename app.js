@@ -77,7 +77,7 @@ const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 //new code ends
 
 const store = new MongoDBStore({
-    url: dbUrl,
+    mongoUrl: dbUrl,
     secret,
     touchAfter: 24 * 60 * 60
 });

@@ -50,32 +50,6 @@ app.use(mongoSanitize({
 }))
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
-// new code starts
-// const store = MongoDBStore.create({
-//     mongoUrl:dbUrl,
-//     secret,
-//     touchAfter: 24 * 60 * 60
-//   });
-   
-//   store.on('error', function(e) {
-//     console.log(e);
-//   });
-
-//   app.use(session({
-//     store,
-//     name: "session",
-//     secret: process.env.Secret,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//       httpOnly: true,
-//       // secure: true,
-//       expires: Date.now() + 1000 * 60 * 60 *24 * 7,
-//       maxAge: 1000 * 60 * 60 *24 * 7
-//     }
-//   })); 
-//new code ends
-
 const store = new MongoDBStore({
     mongoUrl: dbUrl,
     secret,
@@ -86,7 +60,6 @@ store.on("error", function (e) {
     console.log("SESSION STORE ERROR", e)
 })
 
-  //old code starts
   const sessionConfig = {
     store,
     name: 'session',
@@ -101,9 +74,7 @@ store.on("error", function (e) {
     }
 }
 app.use(session(sessionConfig));
-//old code ends
 app.use(flash());
-//app.use(helmet());
 
 
 const scriptSrcUrls = [
